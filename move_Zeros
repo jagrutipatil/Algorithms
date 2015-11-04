@@ -1,0 +1,38 @@
+/*
+Move Zeroes
+
+Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+For example, given nums = [0, 1, 0, 3, 12], after calling your function, nums should be [1, 3, 12, 0, 0].
+
+Note:
+You must do this in-place without making a copy of the array.
+Minimize the total number of operations.
+
+*/
+
+public class Solution {
+    public void moveZeroes(int[] nums) {
+    	Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    	int i = 0, j = 0, l = nums.length, count = 0;
+    	for (i = 0; i < l; i++) {
+    		if (nums[i] == 0) {
+    			count++;
+    			map.put(l-1, 0);
+    		} else {
+    			map.put(j++, nums[i]);    			
+    		}
+    	}
+    	for (i = 0; i < j;i++) {
+    		if (map.containsKey(i)) {
+    			nums[i] = map.get(i);
+    		}
+    	}
+
+    	while (count > 0) {
+    		nums[i] = 0;
+    		i++;
+    		count--;
+    	}
+    }
+}
