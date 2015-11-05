@@ -1,0 +1,71 @@
+/*
+Fraction to Recurring Decimal
+
+
+Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.
+
+If the fractional part is repeating, enclose the repeating part in parentheses.
+
+For example,
+
+Given numerator = 1, denominator = 2, return "0.5".
+Given numerator = 2, denominator = 1, return "2".
+Given numerator = 2, denominator = 3, return "0.(6)".
+
+*/
+
+
+public class Solution {
+    public String fractionToDecimal(int numerator, int denominator) {
+ 		String result = "";
+ 		StringBuffer remain = new StringBuffer("");
+ 		if (denominator == 0 || numerator == 0) {
+ 			return "0";
+ 		}
+
+
+ 		long num = numerator, din = denominator;
+ 		if (num < 0 && din > 0) {
+            result = result + "-";    
+            num = num * -1;
+        } else if (num > 0 && din < 0) {
+            din = din*-1;
+            result = result + "-";
+        } else if (num < 0 && din < 0) {
+            num= num *-1;
+            din = din *-1;
+        }
+        
+ 		num = Math.abs(num);
+ 		din = Math.abs(din);
+        
+ 		long div = num/din;
+
+ 		long cRemain = (num % din)*10;
+ 		result = result + String.valueOf(div) ;
+ 		if (cRemain == 0) {
+ 		    return result;    
+ 		}
+ 		
+ 		result = result + ".";
+ 		HashMap<Long, Integer> map = new HashMap<Long, Integer>();
+
+ 		while (cRemain != 0) {
+ 			if (map.containsKey(cRemain)) {
+ 				int beg = map.get(cRemain);
+ 				String part1= result.substring(0, beg);
+ 				String part2 = result.substring(beg, result.length());
+ 				result = part1 + "(" + part2 + ")";
+ 				return result;
+ 			} 
+
+ 			
+ 			map.put(cRemain, result.length());
+ 			div = cRemain/din;
+ 			result = result + String.valueOf(div); 
+ 			cRemain = (cRemain % din) * 10;
+ 		
+ 		}
+ 		return result;
+    }
+}
