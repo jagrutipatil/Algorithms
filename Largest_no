@@ -1,0 +1,43 @@
+/*Largest No
+
+Given a list of non negative integers, arrange them such that they form the largest number.
+
+For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
+
+Note: The result may be very large, so you need to return a string instead of an integer.
+
+
+*/
+
+
+public class Solution {
+    public String largestNumber(int[] nums) {
+ 		String[] strs = new String[nums.length];
+ 		int i = 0;
+ 		StringBuffer strb = new StringBuffer();
+
+ 		for (i = 0; i < nums.length; i++) {
+ 			strs[i] = String.valueOf(nums[i]);
+ 		}
+ 		
+ 			Arrays.sort(strs, new Comparator<String>() {
+ 				public int compare(String str1, String str2) {
+ 					String lr = str1 + str2;
+ 					String rl = str2 + str1;
+ 					return -lr.compareTo(rl);
+ 				}
+ 			});
+
+ 			
+ 			for (String str : strs) {
+ 				strb.append(str);
+ 			}
+ 		
+
+ 		while ( strb.length() > 1 && strb.charAt(0)== '0') {
+ 			strb.deleteCharAt(0);
+ 		}
+ 		
+ 		return strb.toString();      
+    }
+}
