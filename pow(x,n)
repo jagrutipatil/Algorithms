@@ -1,0 +1,45 @@
+/*
+Pow(x, n)
+mplement pow(x, n).
+
+*/
+
+
+//Brute Force Solution
+
+public class Solution {
+    public double myPow(double x, int n) {
+ 		double mult = 1;
+ 		for (int i = 1; i <= n; i++) {
+ 			mult = mult * x;
+ 		}  
+ 		return mult;     
+    }
+}
+
+//more effective sollution
+
+public class Solution {
+    public double myPow(double x, int n) {
+ 		double result = 1;
+ 		int nn = n;
+
+ 		if (n < 0) {
+ 			nn = -n;
+ 		}
+
+ 		while (nn > 0) {
+ 			if (nn %2 != 0) {
+ 				result = result * x;
+ 			}
+ 			x =x *x;
+ 			nn = nn/2;
+ 		}
+ 		
+ 		if (n < 0) {
+ 			return 1/result;
+ 		}
+
+ 		return result;
+    }
+}
