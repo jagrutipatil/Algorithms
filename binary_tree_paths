@@ -24,22 +24,38 @@ All root-to-leaf paths are:
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
-    	List<String> arr = new ArrayList<String>();
+       List<String> ret = new ArrayList<String>();
 
-        arr = searchPath(root, "", arr);
-        return arr;
+       if(root == null) {
+          return ret;
+       }
+       
+        ret = searchPath(root, "", ret);
+        return ret;
     }
 
-    List<String> searchPath(ListNode root, String no, List<String> str) {
+    private List<String> searchPath(TreeNode root, String path, List<String> str) {
     	if (root == null) {
-    		return "";
+    		return str;
     	}
-
-    	no = no + root.val;
+    	
     	if (root.left == null && root.right == null) {
-    		
+    		str.add(path + root.val);
+    		return str;
     	}
+        
+        if (root.left != null) {
+            searchPath(root.left, path + root.val + "->", str);    
+        } 
+        
+        if (root.right != null) {
+            searchPath(root.right, path + root.val + "->", str);    
+        }
+    	
+    	
+    	return str;
     }
 }
