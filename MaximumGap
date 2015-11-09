@@ -1,0 +1,39 @@
+/*
+
+Given an unsorted array, find the maximum difference between the successive elements in its sorted form.
+
+Try to solve it in linear time/space.
+
+Return 0 if the array contains less than 2 elements.
+
+You may assume all elements in the array are non-negative integers and fit in the 32-bit signed integer range.
+
+*/
+
+
+public class Solution {
+    public int maximumGap(int[] nums) {
+       int i, j, key, t;
+       if (nums.length < 2) {
+        return 0;
+       }   
+       int mdiff = 0;
+
+       //sorting the array
+       for (i = 1 ; i < nums.length ; i++) {
+            key = nums[i];
+            j = i -1 ;
+            for ( j = i -1; j >= 0 && nums[j] > key; j--) {
+                  nums[j+1] = nums[j];
+            }
+            nums[j+1] = key;
+       }
+
+       for (i = 1; i < nums.length ; i++) {
+           if (Math.abs(nums[i-1] - nums[i]) > mdiff) {
+               mdiff = Math.abs(nums[i-1] - nums[i]);
+           }
+       }
+       return mdiff;
+    }
+}
