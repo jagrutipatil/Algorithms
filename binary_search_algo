@@ -1,0 +1,26 @@
+/* Binary Search Algorithm
+*/
+
+
+  public boolean searchArray(int[] array, int target) {
+
+     if (array == null)
+      return false;    
+
+      return search(array, 0, array.length - 1, target);     
+   }
+
+   boolean search(int[] array, int start, int end, int target) {
+    int middle = (start + end)/2;
+   
+    if (start <= end) {
+      if (array[middle] < target) {
+          return search(array, middle +1, end, target);
+        } else if (array[middle] > target) {
+          return search(array,  start, middle -1, target);
+        } else if (array[middle] == target) {
+          return true;
+        }
+    }
+    return false;
+  }

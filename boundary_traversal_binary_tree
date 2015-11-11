@@ -1,0 +1,13 @@
+/*
+Boundary Traversal of binary tree
+
+clock wise
+
+1. print the right boundary in top down manner
+	- traverse from root to the node whose right node is null
+2. print all leaf node from right to left manner
+	- print all leaf nodes of right subtree from right to left
+	- print all leaf nodes of left subtree from right to left
+3. print all let boundary from down to up manner
+	- traverse from root to left node and push each node to the stack and while printing pop it
+*/
