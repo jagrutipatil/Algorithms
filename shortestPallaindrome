@@ -1,0 +1,91 @@
+/*
+Shortest Pallaindrome
+
+Given a string S, you are allowed to convert it to a palindrome by adding characters in front of it. Find and return the shortest palindrome you can find by performing this transformation.
+
+For example:
+
+Given "aacecaaa", return "aaacecaaa".
+
+Given "abcd", return "dcbabcd".
+
+https://leetcode.com/discuss/52564/a-kmp-based-java-solution-with-explanation
+*/
+
+
+//________________________________________________Not Correct_______________________________________
+public class Solution {
+    public String shortestPalindrome(String s) {
+     	int i = 0, j = 0 , k = 0, l = s.length(), m =0;
+ 		HashMap<Integer, Character> map = new HashMap<Integer, Character>();
+
+ 		j = l-1;
+ 		while(i < l && j >=0 && i < j) {
+ 			if ((s.charAt(i) == s.charAt(j)) && (i+1 < j-1)) {
+ 				map.put(k, s.charAt(i));
+ 				i++; j--;
+ 			} else {
+ 			  map.put(k, s.charAt(j));
+ 			  j--;
+ 			}
+ 			k++;
+ 		}
+ 		
+ 		if(i == j) {
+ 			map.put(k, s.charAt(j));
+ 			k++;
+ 		}
+
+ 		StringBuffer buff = new StringBuffer();
+ 		for(m = 0 ; m < k; m++) {
+ 			buff.append(map.get(m));
+ 		} 
+
+ 		for(m = k-2 ; m >= 0; m--) {
+ 			buff.append(map.get(m));
+ 		}
+ 		return buff.toString();
+    }
+}
+
+//_______________________________________________ Correct _______________________________________
+
+public class Solution {
+ public String shortestPalindrome(String s) {
+        if(s.length()<=1) return s;
+        String new_s = s+"#"+new StringBuilder(s).reverse().toString();
+        int[] position = new int[new_s.length()];
+
+        for(int i=1;i<position.length;i++)
+        {
+            int pre_pos = position[i-1];
+            while(pre_pos>0 && new_s.charAt(pre_pos)!=new_s.charAt(i))
+                pre_pos = position[pre_pos-1];
+            position[i] = pre_pos+((new_s.charAt(pre_pos)==new_s.charAt(i))?1:0);
+        }
+
+        return new StringBuilder(s.substring(position[position.length-1])).reverse().toString()+s;
+    }
+}
+
+//______________________ Working Best Solution____________________________________________________________
+
+
+public class Solution {
+ public String shortestPalindrome(String s) {
+        int i = s.length()-1, j =0;
+
+        for (; i >= 0; i--) {
+        	if (s.charAt(i) == s.charAt(j)) {
+        		j++;
+        	}
+        }
+        if (j == s.length()) {
+        	return s;
+        }
+
+
+        String suffix = s.substring(j);
+        return new StringBuffer(suffix).reverse().toString() + shortestPalindrome(s.substring(0, j)) + suffix;
+    }
+}

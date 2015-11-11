@@ -1,0 +1,22 @@
+/*segreggate zeros and one's*/
+
+void segregate0and1(int arr[]) {
+	int l = 0, r = size.length;
+
+	while (l < r) {
+		while (num[l] == 0) {
+		 l++;
+		}
+
+		while (num[r] == 1) {
+		 r++;
+		}
+
+		if (l < r) {
+			num[l] = 0;
+			num[r] =0;
+			l++;
+			r--;
+		}
+	}
+}
