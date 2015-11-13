@@ -1,0 +1,45 @@
+/*
+Sort Colors
+Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+
+Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+
+Note:
+You are not suppose to use the library's sort function for this problem.
+
+
+*/
+
+
+
+public class Solution {
+    public void sortColors(int[] nums) {
+        int i = 0, c0 = 0, c1 = 0, c2 = 0, k = 0;
+        for (; i < nums.length; i++) {
+            if (nums[i] == 0) 
+                c0++;
+            if (nums[i] == 1) 
+                c1++;
+            if (nums[i] == 2) 
+                c2++;    
+        }
+        
+        while (c0!=0) {
+            nums[k] = 0;
+            c0--;
+            k++;
+        }       
+
+        while (c1!=0) {
+            nums[k] = 1;
+            c1--;
+            k++;
+        }
+
+        while (c2!=0) {
+            nums[k] = 2;
+            c2--;
+            k++;
+        }
+    }
+}

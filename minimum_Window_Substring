@@ -1,0 +1,69 @@
+/*
+Minimum Window Substring
+
+Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
+
+For example,
+S = "ADOBECODEBANC"
+T = "ABC"
+Minimum window is "BANC".
+
+*/
+
+public class Solution {
+    public String minWindow(String s, String t) {
+    	if (s == "" && t == "") 
+    		return "";
+
+
+    	Map<Character, Integer> dir = new HashMap<Character, Integer>();	
+    	for (int i = 0; i< t.length(); i++) {
+    	    if (dir.containsKey(t.charAt(i))) {
+    	        dir.put(t.charAt(i), dir.get(t.charAt(i))+1);    
+    	    } else {
+    	        dir.put(t.charAt(i), 1);    
+    	    }
+    	}
+
+    	int left = 0;
+    	int foundCount = 0;	
+    	String result = "";
+    	int minLength = s.length() + 1;
+    	Map<Character, Integer> foundDir = new HashMap<Character, Integer>();
+
+ 		for (int i = 0; i < s.length(); i++) {
+ 			Character ch = s.charAt(i);
+ 			if (dir.containsKey(ch)) {
+ 				if (foundDir.containsKey(ch)) {
+ 					if (foundDir.get(ch) < dir.get(ch)) {
+ 						foundCount++;
+ 					}
+ 				    foundDir.put(ch, foundDir.get(ch) + 1);	
+ 				} else {
+ 					foundDir.put(ch, 1);
+ 					foundCount++;
+ 				}
+ 			}
+
+ 			if (foundCount == t.length()) {
+ 				Character sch = s.charAt(left);
+
+ 				while (!dir.containsKey(sch) || dir.get(sch) < foundDir.get(sch)) {
+ 					if (dir.containsKey(sch) && dir.get(sch) < foundDir.get(sch)) {
+ 						foundDir.put(sch, foundDir.get(sch) -1);
+ 					}
+ 					left++;
+ 					sch = s.charAt(left);
+ 				}
+
+ 				if ((i - left +1 ) < minLength) {
+ 					result = s.substring(left, i+1);
+ 					minLength = i-left+1;
+ 				}
+ 			}
+ 		}
+ 		return result;       
+    
+
+    }
+}
