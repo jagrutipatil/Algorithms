@@ -1,0 +1,101 @@
+/*
+Intersection of Two Linked Lists
+
+Write a program to find the node at which the intersection of two singly linked lists begins.
+
+
+For example, the following two linked lists:
+
+A:          a1 → a2
+                   ↘
+                     c1 → c2 → c3
+                   ↗            
+B:     b1 → b2 → b3
+begin to intersect at node c1.
+
+*/
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+// by calculating length
+ public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int len1 = 0;
+        int len2 = 0;
+
+        ListNode p1 = headA;
+        ListNode p2 = headB;
+
+        while (p1 != null) {
+            len1++;
+            p1 = p1.next;
+        }              
+
+        while (p2 != null) {
+            len2++;
+            p2 = p2.next;
+        }
+
+        p1 = headA;
+        p2 = headB;
+
+        if (len1 > len2) {
+            for (int i = 0; p1 != null && i < (len1-len2); i++) {
+                p1 = p1.next;
+            }
+        } else {
+            for (int i = 0; p2 != null && i < (len2-len1); i++) {
+                p2 = p2.next;
+            }
+        }
+
+        while (p1 != null && p2 != null) {
+            if (p1.val == p2.val || p1 == p2) {
+                return p1;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        return null;
+    }
+}
+
+
+//without calculating length
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+
+        ListNode node1 = headA; 
+        ListNode node2 = headB;
+        
+        while (node1 != node2) {
+            if (node1 == null) {
+                node1 = headB;
+            } else {
+                node1 = node1.next;
+            }
+
+            if (node2 == null) {
+                node2 = headA;
+            } else {
+                node2 = node2.next;
+            }            
+        }
+        return node1;
+    }
+ }
