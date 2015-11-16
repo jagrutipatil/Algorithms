@@ -1,0 +1,50 @@
+/*
+Construct Binary Tree from Preorder and Inorder Traversal
+
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+ //RECURSIVE
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+ 		List<Integer> result = new ArrayList<Integer>();  
+
+ 		if (root != null) {
+ 			postorder(root, result);
+ 		}
+ 		return result;
+    }
+
+    void postorder(TreeNode node, List<Integer> result) {
+    	if (node.left != null) {
+    		postorder(node.left, result);
+    	}
+
+    	if (node.right != null) {
+    		postorder(node.right, result);
+    	}
+
+    	result.add(node.val);
+    }
+}
+
+//ITERATIVE TODO
+
+
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+ 		List<Integer> result = new ArrayList<Integer>();  
+
+ 		
+ 		return result;
+    }
+}
