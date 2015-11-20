@@ -1,0 +1,79 @@
+/*
+Add and Search Word - Data structure design
+
+Design a data structure that supports the following two operations:
+
+void addWord(word)
+bool search(word)
+search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.
+
+For example:
+
+addWord("bad")
+addWord("dad")
+addWord("mad")
+search("pad") -> false
+search("bad") -> true
+search(".ad") -> true
+search("b..") -> true
+
+*/
+
+class TreeNode {
+    Map<Character, TreeNode> children = new HashMap<Character, TreeNode>();
+    boolean isLeaf = false;
+    public TreeNode() {
+    }
+}
+
+public class WordDictionary {
+        
+    TreeNode root = new TreeNode();
+
+    public void addWord(String word) {
+        TreeNode temp = root;
+        Map<Character, TreeNode> children = temp.children;
+
+        for (int i = 0; word != null && i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (children.containsKey(ch)) {
+                temp = children.get(ch);
+                children = temp.children;
+            } else {
+                TreeNode newNode = new TreeNode();
+                children.put(ch, newNode);
+                children = newNode.children;
+                temp = newNode;
+            }
+        }
+        temp.isLeaf = true;
+    }
+
+    // Returns if the word is in the data structure. A word could
+    // contain the dot character '.' to represent any one letter.
+    public boolean search(String word) {
+        return rSearch(root, 0, word);
+    }
+
+    public boolean rSearch(TreeNode temp, int cLength, String word) {
+        if (cLength == word.length()) return temp.isLeaf;
+
+        if (word.charAt(cLength) != '.') {
+            char ch = word.charAt(cLength);
+            return temp.children.containsKey(ch) && rSearch(temp.children.get(ch), cLength+1, word);
+        } else {
+            for (Map.Entry<Character,TreeNode> entry : temp.children.entrySet()) {
+                if (rSearch(entry.getValue(), cLength+1, word)) 
+                    return true;
+            }
+        }
+        return false;
+    }
+    
+}
+
+
+// Your WordDictionary object will be instantiated and called as such:
+// WordDictionary wordDictionary = new WordDictionary();
+// wordDictionary.addWord("word");
+// wordDictionary.search("pattern");
