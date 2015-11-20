@@ -1,0 +1,92 @@
+/*
+Implement Trie (Prefix Tree)
+
+Implement a trie with insert, search, and startsWith methods.
+
+Note:
+You may assume that all inputs are consist of lowercase letters a-z.
+*/
+
+
+class TrieNode {
+    
+    Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
+    boolean isLeaf = false;
+
+    // Initialize your data structure here.
+    public TrieNode() {    
+    }
+}
+
+public class Trie {
+    private TrieNode root;
+
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    // Inserts a word into the trie.
+    public void insert(String word) {
+        TrieNode temp = root;
+        Map<Character, TrieNode> children = temp.children;
+        
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (children.containsKey(ch)) {
+                temp = children.get(ch);
+            } else {
+                TrieNode newNode = new TrieNode();
+                children.put(ch, newNode);
+                temp = newNode;
+            }
+            children = temp.children;
+        }
+        temp.isLeaf = true;
+    }
+
+    // Returns if the word is in the trie.
+    public boolean search(String word) {
+        return rSearch(root, word, 0);
+    }
+
+    boolean rSearch(TrieNode temp, String word, int cLength) {
+        if (cLength == word.length()) 
+            return temp.isLeaf;
+
+        if (word.charAt(cLength) != '.') {
+            char ch = word.charAt(cLength);
+            return temp.children.containsKey(ch) && rSearch(temp.children.get(ch), word, cLength+1);
+        } else {
+            for (Map.Entry<Character, TrieNode> entry : temp.children.entrySet()) {
+                if (rSearch(entry.getValue(), word, cLength+1)) return true;
+            }
+        }
+        return false;
+    }
+
+    // Returns if there is any word in the trie
+    // that starts with the given prefix.
+    public boolean startsWith(String prefix) {
+           return rStartWith(root, prefix, 0);
+    }
+    
+    boolean rStartWith(TrieNode temp, String word, int cLength) {
+        if (cLength == word.length()) 
+            return true;
+
+        if (word.charAt(cLength) != '.') {
+            char ch = word.charAt(cLength);
+            return temp.children.containsKey(ch) && rStartWith(temp.children.get(ch), word, cLength+1);
+        } else {
+            for (Map.Entry<Character, TrieNode> entry : temp.children.entrySet()) {
+                if (rStartWith(entry.getValue(), word, cLength+1)) return true;
+            }
+        }
+        return false;
+    }
+}
+
+// Your Trie object will be instantiated and called as such:
+// Trie trie = new Trie();
+// trie.insert("somestring");
+// trie.search("key");
