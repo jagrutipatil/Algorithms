@@ -1,0 +1,47 @@
+/*
+Construct Binary Tree from Preorder and Inorder Traversal
+
+Given preorder and inorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+
+
+*/
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+public class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+     	return traverse(inorder, 0, preorder, 0, inorder.length);   
+    }
+
+    TreeNode traverse(int[] inorder, int is, int[] preorder, int ps, int length) {
+    	if (length == 0) {
+    		return null;
+    	}
+    	int val = preorder[ps];
+
+    	int leftlen = 0;
+
+    	for (; leftlen < length; leftlen++) {
+    		if (val == inorder[is + leftlen]) {
+    			break;
+    		}
+    	}
+    	
+        TreeNode root = new TreeNode(val);
+    	root.left = traverse(inorder, is, preorder, ps+1, leftlen);
+    	root.right = traverse(inorder, is+leftlen+1, preorder, ps+leftlen+1, length-leftlen-1);
+    	return root;
+    }
+}
