@@ -1,0 +1,52 @@
+/* Minimum Depth of Binary Tree */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+public class Solution {
+    public int minDepth(TreeNode root) {
+ 		if (root == null) {
+ 			return 0;
+ 		}       
+
+        int min1 = minDepth(root.left)+1;
+        int min2 = minDepth(root.right)+1;
+ 		if (min1 == 1) {
+ 		    return min2;
+ 		} else if (min2 == 1) {
+ 		    return min1;
+ 		} 
+ 		
+ 		return Math.min(min1, min2);
+    }
+}
+
+
+//ANOTHER APPROACH
+
+ 
+public class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) 
+            return 0;
+ 		return depth(root);
+    }
+    
+    int depth(TreeNode root) {
+        if (root == null) {
+ 			return Integer.MAX_VALUE;
+ 		}       
+ 		
+ 		if (root.left == null && root.right == null) {
+ 		    return 1;
+ 		}
+
+ 		return Math.min( depth(root.left),  depth(root.right)) + 1;
+    }
+}
