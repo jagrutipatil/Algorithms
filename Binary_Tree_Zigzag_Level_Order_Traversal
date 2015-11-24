@@ -1,0 +1,44 @@
+/*
+  Binary Tree Zigzag Level Order Traversal
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */ 
+
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+    	List<List<Integer>> result = new ArrayList<List<Integer>>();
+    	dfs(root, 0 , result);	
+
+    	for (int i = 0; i < result.size(); i++) {
+    		if (i%2!=0) {
+    			Collections.reverse(result.get(i));
+    		}
+    	}
+    	return result;
+    }
+
+    public void dfs(TreeNode root, int depth, List<List<Integer>> result) {
+    	List<Integer> list;
+    	if (root == null)
+    		return;
+
+    	if (depth < result.size()) {
+    		list = result.get(depth);
+    	} else {
+    		list = new ArrayList<Integer>();
+    		result.add(list);
+    	}
+   
+    	list.add(root.val);
+    	dfs(root.left, depth+1, result);
+    	dfs(root.right, depth+1, result);
+    }
+}
