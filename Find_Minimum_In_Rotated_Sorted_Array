@@ -1,0 +1,25 @@
+public class Solution {
+    public int findMin(int[] nums) {
+ 		if (nums == null || nums.length == 0) {
+ 			return 0;
+ 		}       
+
+ 		return findMin(nums, 0, nums.length-1);
+    }
+
+    int findMin(int[] nums, int l, int h) {
+    		int m = (l+h)/2;
+
+    		if (l == h) {
+    			return nums[l];
+    		} else if (h -l == 1) {
+    			return Math.min(nums[l], nums[h]);
+    		} else if (nums[l] < nums[h]) {
+    		    return nums[l];
+    		} else if (nums[m] > nums[l]) {
+    			return findMin(nums, m , h);
+    		} else {
+    			return findMin(nums, l , m);
+    		}
+    }
+}
