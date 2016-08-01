@@ -37,3 +37,44 @@ public class Solution {
  		return result;
     }
 }
+
+// By incrementing order
+
+class Solution {
+    /**
+     * @param S: A set of numbers.
+     * @return: A list of lists. All valid subsets.
+     */
+    public ArrayList<ArrayList<Integer>> subsetsWithDup(ArrayList<Integer> S) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
+        Collections.sort(S);
+        
+        for (int i = 0; i < S.size(); i++) {
+            if (i == 0 || S.get(i) != S.get(i-1)) {
+                temp = new ArrayList<ArrayList<Integer>>();
+                for (ArrayList<Integer> list : result) {
+                    temp.add(new ArrayList<Integer>(list));
+                }
+            }
+
+            for (ArrayList<Integer> list: temp) {
+                list.add(S.get(i));
+            }
+
+            if (i == 0 || S.get(i) != S.get(i-1)) {
+                ArrayList<Integer> self = new ArrayList<Integer>();
+                self.add(S.get(i));
+                temp.add(self);
+            }
+
+            for (ArrayList<Integer> list: temp) {
+                result.add(new ArrayList<Integer>(list));
+            }
+        }
+        ArrayList<Integer> empty = new ArrayList<Integer>();
+        result.add(empty);
+        
+        return result;
+    }
+}
