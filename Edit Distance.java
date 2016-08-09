@@ -1,3 +1,21 @@
+/*
+Edit Distance
+
+Given two words word1 and word2, find the minimum number of steps required to convert word1 to word2. (each operation is counted as 1 step.)
+
+You have the following 3 operations permitted on a word:
+ - Insert a character
+ - Delete a character
+ - Replace a character
+
+Example
+Given word1 = "mart" and word2 = "karma", return 3.
+
+Logic:
+	1. if characters are similar that means you just have to take minimum steps as a carry over from previous step i.e dp[i-1][j-1]
+	2. if characters are different- you have to consider all possiblities by which you can get the minimum count, i.e dp[i-1][j], dp[i-1][j-1], dp[i][j-1]
+
+*/
 public class Solution {
     public int minDistance(String word1, String word2) {
 		int m = word1.length();
