@@ -1,3 +1,9 @@
+/*
+Given n non-negative integers representing the histogram's bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.
+
+Logic: use stack to store only incresing height and when next bar is lower than previous height calculate its area. 
+*/
+
 public class Solution {
     public int largestRectangleArea(int[] heights) {
         int max = 0, i = 0;
