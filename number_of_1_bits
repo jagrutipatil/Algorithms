@@ -1,16 +1,50 @@
 /*
-Number of 1 Bits
+Count 1 in Binary
 
-Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as the Hamming weight).
+Count how many 1 in binary representation of a 32-bit integer.
 
-For example, the 32-bit integer ’11' has binary representation 00000000000000000000000000001011, so the function should return 3.
+Example
+Given 32, return 1
 
+Given 5, return 2
 
+Given 1023, return 9
 */
 
+Complexity O(n) n = 32 bit
+
 public class Solution {
-    // you need to treat n as an unsigned value
-    public int hammingWeight(int n) {
-        
+    /**
+     * @param num: an integer
+     * @return: an integer, the number of ones in num
+     */
+    public int countOnes(int num) {
+    	int count = 0;
+  		for (int i = 0; i < 32; i++) {
+  			if ((num & 1) == 1) {
+  				count++;
+  			}
+  			num = num>>1;
+  		}
+  		return count;
     }
-}
+};
+
+
+________________________________________________________________________
+Complexity O(m) where m is the number of bits
+
+public class Solution {
+    /**
+     * @param num: an integer
+     * @return: an integer, the number of ones in num
+     */
+    public int countOnes(int num) {
+       int count = 0;
+  		while (num != 0) {
+  			num = num & (num-1);
+  			count++;
+  		}
+  		return count;
+    }
+};
