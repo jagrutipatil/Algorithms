@@ -29,8 +29,6 @@ public class Solution {
   		return count;
     }
 };
-
-
 ________________________________________________________________________
 Complexity O(m) where m is the number of bits
 
