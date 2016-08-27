@@ -55,3 +55,24 @@ public class Solution {
     	node.right = left;
     }
 }
+
+
+_____________________________________________________
+//More cleaner solution
+
+public class Solution {
+    /**
+     * @param root: a TreeNode, the root of the binary tree
+     * @return: nothing
+     */
+    public void invertBinaryTree(TreeNode root) {
+      if (root != null) 
+        return;
+
+      TreeNode left = root.left;
+      root.left = root.right;
+      root.right = left;
+      invertBinaryTree(root.left);
+      invertBinaryTree(root.right);
+    }
+}
