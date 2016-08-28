@@ -30,9 +30,35 @@ public class Solution {
  		temp.right=right;
     }
 }
+__________________________________________________________
+// Alternate recursive way
 
+public class Solution {
+    /**
+     * @param root: a TreeNode, the root of the binary tree
+     * @return: nothing
+     */
+    public void flatten(TreeNode root) {
+        if (root == null) 
+            return;
+        flatten(root.left);
+        flatten(root.right);
 
-//Method 2
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+
+        root.left = null;
+        root.right = left;
+
+        TreeNode temp = root;
+        while (temp.right != null) {
+            temp = temp.right;
+        }
+        temp.right = right;
+    }
+}
+___________________________________________________________
+//Iterative
 public class Solution {
     public void flatten(TreeNode root) {
  		traverseTail(root);
