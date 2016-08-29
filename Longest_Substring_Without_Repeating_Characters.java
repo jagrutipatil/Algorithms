@@ -1,6 +1,15 @@
-// Longest Substring Without Repeating Characters
+/* 
+	Longest Substring Without Repeating Characters
+	Given a string, find the length of the longest substring without repeating characters.
 
+	For example, the longest substring without repeating letters for "abcabcbb" is "abc", which the length is 3.
 
+	For "bbbbb" the longest substring is "b", with the length of 1.
+	
+	Logic: Time complexity O(n) solution: use array of 256 characters initialized with -1, if character has never occured before or occurred before current starting index of new substring
+			then increment the current length else take max of currentlength with previous max length.
+
+*/
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
  		if (s == null || s.equals(""))
@@ -28,5 +37,45 @@ public class Solution {
  			maxLength = currLength;
 
  		return maxLength;
+    }
+}
+
+
+//____________________________________________________________________
+
+With O(n) space
+public class Solution {
+    /**
+     * @param s: a string
+     * @return: an integer 
+     */
+    public int lengthOfLongestSubstring(String s) {
+    	int len = 0, max = 0;
+    	Map<Character, Integer> map = new HashMap<Character, Integer>();
+
+    	for (int i = 0; i < s.length(); i++) {
+    		char ch = s.charAt(i);
+    		if (map.containsKey(ch)) {
+    			int lastIndex = map.get(ch);
+    			removeBefore(ch, map);
+    			len = i - lastIndex;
+    			map.put(ch, i);
+    		} else {
+    			map.put(ch, i);
+    			len++;
+    		}
+    		max = Math.max(max, len);
+    	}
+    	return max;
+    }
+
+    private void removeBefore(Character ch, Map<Character, Integer> map) {
+    	int index = map.get(ch);
+    	Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Character, Integer> entry = (Map.Entry<Character, Integer>)it.next();
+            if (entry.getValue() <= index)            
+                it.remove(); 
+        }
     }
 }
