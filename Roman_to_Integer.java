@@ -5,7 +5,10 @@ Given a roman numeral, convert it to an integer.
 
 Input is guaranteed to be within the range from 1 to 3999.
 
-
+Logic: Check current character with next character, if character is less than next character, 
+        e.g: IV, minus I then add V = -1+5 = 4
+       If no is greather than next character, add the character to result
+       e.g: VI, add V, add I = 6 
 */ 
 
 
