@@ -1,7 +1,9 @@
 /*
 Pow(x, n)
-mplement pow(x, n).
+implement pow(x, n).
 
+Logic: Main logic here is to divide the power and multiply the number to itself and keep building result.
+	   Two main test cases here if power is here or power is odd, if power is odd then you want to multiply that number only once and if even then twice.
 */
 
 
