@@ -1,3 +1,17 @@
+/*
+    Longest Palindromic Substring
+
+    Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
+
+    Example
+    Given the string = "abcdzdcab", return "cdzdc".
+
+    Logic: string is palindrome if its reverse is the same string, i.e around a center approaching towards its left and right, all characters are same
+           e.g: aba. You can loop over a string and considering each index as a center and find out its left and right, store string's start and length to return the largest palindrome substring.
+           - consider even and odd length palindrome substrings
+
+
+*/
 public class Solution {
 	int low = 0, maxlen = 0;
     public String longestPalindrome(String s) {
