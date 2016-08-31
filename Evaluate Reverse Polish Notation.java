@@ -1,4 +1,17 @@
-//Evaluate Reverse Polish Notation
+/*
+    Evaluate Reverse Polish Notation
+    
+    Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+    Valid operators are +, -, *, /. Each operand may be an integer or another expression.
+    
+    Example
+        ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9
+        ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
+    
+    Logic: 
+        1. Use stack, 
+        2. if oprand push to stack, else pop two values from the stack perform operation and push result back to stack
+*/
 
 public class Solution {
     public int evalRPN(String[] tokens) {
