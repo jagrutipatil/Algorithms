@@ -1,3 +1,25 @@
+/*
+    Number of Islands
+
+    Given a boolean 2D matrix, find the number of islands.
+
+Example
+Given graph:
+
+[
+  [1, 1, 0, 0, 0],
+  [0, 1, 0, 0, 1],
+  [0, 0, 0, 1, 1],
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1]
+]
+return 3.
+
+Logic: 
+      Count the number of 1 and clear land around that 1.
+*/
+
+
 public class Solution {
     public int numIslands(char[][] grid) {
     	int count = 0;
