@@ -1,3 +1,14 @@
+/*
+Determine whether a Sudoku is valid.
+
+The Sudoku board could be partially filled, where empty cells are filled with the character ..
+
+
+Logic:
+	1. Take 3 sets, one for row, one for colum and one for grid validation.
+		if number is duplicated in the set then its not a valid sudoku
+*/
+
 public class Solution {
     public boolean isValidSudoku(char[][] board) {
  		Set<Character> set1 = new HashSet<Character>();
