@@ -1,3 +1,16 @@
+/*
+    Given a digit string excluded 01, return all possible letter combinations that the number could represent.
+
+    A mapping of digit to letters (just like on the telephone buttons) is given below.
+
+    Example
+            Given "23"
+
+    Return ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
+
+    Logic: Use same logic as permutation just validating condition as length of string equals to digits length.
+
+*/
 public class Solution {
     public List<String> letterCombinations(String digits) {
     	String[] letters = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
