@@ -6,6 +6,10 @@ Given n pairs of parentheses, write a function to generate all combinations of w
 For example, given n = 3, a solution set is:
 
 "((()))", "(()())", "(())()", "()(())", "()()()"
+
+Logic: Same as generting permutation, combination
+       Important factors, right parentheses should be only generated when already left parentheses is there,
+       if total length of left and right is equal to 2 * number of parentheses to generate, its valid item in solution set.
 */
 
 
