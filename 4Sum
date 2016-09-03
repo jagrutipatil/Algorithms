@@ -52,3 +52,51 @@ public class Solution {
     }
 
 }
+
+__________________________________________________________________________________
+//Without Set
+
+public class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+    	
+ 		Arrays.sort(nums);       
+ 		List<List<Integer>> result = new ArrayList<List<Integer>>();
+
+ 		for (int i = 0; i < nums.length-3; i++) {
+ 			if (i == 0 || nums[i-1] != nums[i]) {
+			for (int j = i+1; j < nums.length-2; j++) {
+				if (j == i+1 || nums[j-1] != nums[j]) {
+ 				int k = j+1;
+ 				int l = nums.length-1;
+
+ 				while (k < l) {
+ 					int sum = nums[i] + nums[j] + nums[k] + nums[l];
+ 					if (sum == target) {
+ 						List<Integer> list = new ArrayList<Integer>();
+ 						list.add(nums[i]);
+ 						list.add(nums[j]);
+ 						list.add(nums[k]);
+ 						list.add(nums[l]);
+ 						result.add(list);
+ 						k++;
+ 						l--;
+ 						while (k < l && nums[k-1] == nums[k]) {
+ 							k++;
+ 						}
+
+ 						while (k < l && nums[l] == nums[l+1]) {
+ 							l--;
+ 						}
+ 					} else if (sum < target) {
+ 						k++;
+ 					} else {
+ 						l--;
+ 					}
+ 				}
+ 			  } 			
+ 			}
+ 		   }
+ 		}
+ 		return result;
+    }
+}
