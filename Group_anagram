@@ -41,3 +41,40 @@ public class Solution {
  		return strList;   
     }
 }
+
+
+_____________________________________________________________________
+/*
+	Another approach without sorting	
+	take array of 26 characters
+*/
+
+public class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+ 		Map<String, List<String>> map = new HashMap<String, List<String>>();
+ 		List<List<String>> result = new ArrayList<List<String>>();
+
+ 		for (String str : strs) {
+ 		    char[] arr = new char[26];
+ 		    for (char ch : str.toCharArray()) {
+ 		        arr[ch-'a']++;
+ 		    }
+ 			String sorted = new String(arr);
+ 			
+ 			List<String> values = null;
+ 			if (map.containsKey(sorted)) {
+ 				values = map.get(sorted);
+ 			} else {
+ 				values = new ArrayList<String>();
+ 			}
+ 			values.add(str);
+ 			map.put(sorted, values);
+ 		}
+        
+        for (String str : map.keySet()) {
+            result.add(map.get(str));    
+        }
+ 		
+ 		return result;
+    }
+}
