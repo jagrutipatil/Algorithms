@@ -43,3 +43,47 @@ class Solution {
         return -1;
     }
 }
+
+
+//______________________________________________________________________________
+
+//Correct Approach
+
+/*
+    why?
+
+    Before this problem, I have always use
+
+    mid = (start+end)) / 2;
+
+    To get the middle value, but this can caused OVERFLOW !
+
+    when start and end are all about INT_MAX , then (start+end) of course will be overflow !
+
+    To avoid the problem we can use
+
+    mid =  start+(end-start)/2;
+
+*/
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
+
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int start = 1, end = n;
+        
+        while (start <= end) {
+            int mid = start + (end-start)/2;
+            if (start == end && isBadVersion(start))
+                return start;
+                
+            if (isBadVersion(mid)) {
+                end = mid;
+            } else {
+                start = mid+1;
+            }           
+        }       
+
+        return -1;
+    }
+}
