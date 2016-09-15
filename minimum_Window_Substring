@@ -67,3 +67,33 @@ public class Solution {
 
     }
 }
+
+//------------------------------------------------------
+
+public class Solution {
+    public String minWindow(String s, String t) {
+        int[] arr = new int[256];
+        int c = 0, start = 0, len = Integer.MAX_VALUE, begin = 0;
+
+        for (int i = 0; i < t.length(); i++) {
+            arr[t.charAt(i)]++;
+        }       
+
+        for (int i = 0; i < s.length(); i++) {
+            if (--arr[s.charAt(i)] >= 0)
+                c++;
+
+            while (c >= t.length()) {
+                if (i-begin < len) {
+                    start = begin;
+                    len = i - begin;
+                }
+
+                if (++arr[s.charAt(begin++)] > 0) {
+                    c--;
+                }
+            }
+        }
+        return len == Integer.MAX_VALUE? "" : s.substring(start, start+len+1);
+    }
+}
