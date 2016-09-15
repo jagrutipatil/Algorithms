@@ -45,3 +45,32 @@ public class Solution {
  		return result;
     }
 }
+
+
+___________________________________
+
+/********To handle the case where N=INTEGER_MIN we use a long (64-bit) variable. Below is solution:*************/
+public class Solution {
+    public double myPow(double x, int n) {
+		double result = 1.0;
+        int sign = 1;
+        long nn = n;
+        if (n < 0) {
+            sign = -1;
+            nn = Math.abs((long)n);
+        }
+            
+		while (nn > 0) {
+			if (nn%2 != 0) {
+				result = result*x;
+			}
+			x = x*x;
+			nn = nn/2;
+		}        
+		
+		if (sign == -1) 
+		    return 1/result;
+		    
+		return result;
+    }
+}
