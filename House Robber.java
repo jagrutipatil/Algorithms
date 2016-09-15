@@ -37,3 +37,17 @@ public class Solution {
 }
 
 
+//____________________________________________________________
+//Without extra memory
+
+public class Solution {
+    public int rob(int[] nums) {
+        int prev = 0, curr = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int temp = Math.max(nums[i]+prev, curr);
+            prev = curr;
+            curr = temp;
+        }
+        return curr;
+    }
+}
