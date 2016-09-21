@@ -1,37 +1,32 @@
 /*
 	Paint House
 
-	There is a fence with n posts, each post can be painted with one of the k colors.
-	You have to paint all the posts such that no more than two adjacent fence posts have the same color.
-	Return the total number of ways you can paint the fence.
+	There are a row of n houses, each house can be painted with one of the three colors: red, blue or green. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color.
 
-	Logic:
+	The cost of painting each house with a certain color is represented by a n x 3 cost matrix. For example, costs[0][0] is the cost of painting house 0 with color red; costs[1][2] is the cost of painting house 1 with color green, and so on... Find the minimum cost to paint all houses.
 
-		The key to solve this problem is finding this relation.
+	Example
+			Given costs = [[14,2,11],[11,14,5],[14,3,10]] return 10	
 
-f(n) = (k-1)(f(n-1)+f(n-2))
-
-Assuming there are 3 posts, if the first one and the second one has the same color, then the third one has k-1 options. The first and second together has k options.
-If the first and the second do not have same color, the total is k * (k-1), then the third one has k options. Therefore, f(3) = (k-1)*k + k*(k-1)*k = (k-1)(k+k*k)
+			house 0 is blue, house 1 is green, house 2 is blue, 2 + 5 + 3 = 10
 */
 
 public class Solution {
     /**
-     * @param n non-negative integer, n posts
-     * @param k non-negative integer, k colors
-     * @return an integer, the total number of ways
+     * @param costs n x 3 cost matrix
+     * @return an integer, the minimum cost to paint all houses
      */
-    public int numWays(int n, int k) {
-    	int[] dp = {0, k, k*k, 0};
+    public int minCost(int[][] costs) {
+    	if (costs == null || costs.length == 0)
+    		return 0;
 
-    	if (n <= 2)
-    		return dp[n];
-
-    	for (int i = 3; i <= n; i++) {
-    		dp[3] = (k-1)* (dp[1] + dp[2]);
-    		dp[1] = dp[2];
-    		dp[2] = dp[3];
+    	for (int i = 1; i < costs.length; i++) {
+    		costs[i][0] += Math.min(costs[i-1][1], costs[i-1][2]);
+    		costs[i][1] += Math.min(costs[i-1][0], costs[i-1][2]);
+    		costs[i][2] += Math.min(costs[i-1][0], costs[i-1][1]);    		    		
     	}
-    	return dp[3];
+
+    	int m = costs.length-1;
+    	return Math.min(Math.min(costs[m][0], costs[m][1]), costs[m][2]);
     }
 }
