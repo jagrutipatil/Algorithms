@@ -1,3 +1,23 @@
+/*
+    Find Peak Element
+    
+    A peak element is an element that is greater than its neighbors.
+
+    Given an input array where num[i] ≠ num[i+1], find a peak element and return its index.
+
+    The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
+
+    You may imagine that num[-1] = num[n] = -∞.
+
+    For example, in array [1, 2, 3, 1], 3 is a peak element and your function should return the index number 2.
+
+    Logic: to find a pick number there are multiple things to be considered
+           1. Array can contain less than 3 elements
+           2. we can find any peak using binary search
+                2.1 if nums[mid-1] < nums[mid] < nums[mid+1] then peak will be in mid-end half
+                2.2 if nums[mid-1] > nums[mid] > nums[mid+1] then peak will be in start-mid half
+                2.3 if nums[mid-1] > nums[mid] < nums[mid+1] then peak can be in start-mid or mid-end, so we can search in any half bcz edge boundries are -infinity
+*/ 
 
 /**
 * Complexity O(n)
