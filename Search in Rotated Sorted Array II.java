@@ -1,3 +1,16 @@
+/*
+    Search in Rotated Sorted Array II
+
+    Follow up for "Search in Rotated Sorted Array":
+    
+    What if duplicates are allowed? 
+
+    Would this affect the run-time complexity? How and why?
+
+    Write a function to determine if a given target is in the array.
+    
+    logic: Dupliates will only cause problem if its at both ends, so we can avoid the duplicates by compairing start and mid
+*/
 public class Solution {
     public boolean search(int[] nums, int target) {
  		return binarySearch(nums, target, 0, nums.length-1);       
