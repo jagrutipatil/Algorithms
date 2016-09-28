@@ -35,3 +35,34 @@ public class Solution {
     	return result;
     }
 }
+
+//--_____________________________________________-
+//Beats 86% Solutions using cycle detection algorithm of linkedlist
+
+
+public class Solution {
+    public boolean isHappy(int n) {
+        int slow = n, fast = n;
+        slow = sumOfDigits(slow);
+        fast = sumOfDigits(fast);
+        fast = sumOfDigits(fast);
+        
+        while (slow != fast) {
+            slow = sumOfDigits(slow);
+            fast = sumOfDigits(fast);
+            fast = sumOfDigits(fast);
+        }
+        
+        if (slow == 1) return true;
+        return false;
+    }
+    
+    private int sumOfDigits(int no) {
+        int sum = 0;
+        while (no > 0) {
+            sum+= (no%10)*(no%10);
+            no=no/10;
+        }
+        return sum;
+    }
+}
