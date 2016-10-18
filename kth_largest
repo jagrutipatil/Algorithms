@@ -21,3 +21,20 @@ public class Solution {
  		return 0;
     }
 }
+
+
+// using priority queue
+
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+ 		PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+ 		for (int no : nums) {
+ 			queue.offer(no);
+
+ 			if (queue.size() > k) {
+ 				queue.poll();
+ 			}
+ 		}
+ 		return queue.peek();
+    }
+}
