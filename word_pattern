@@ -45,3 +45,31 @@ public class Solution {
        return true;
     }
 }
+
+//--------------------------------- MORE CLEAN WAY --------------------------------
+
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+            String[] first = new String[26];
+            Map<String, Character> map = new HashMap<String, Character>();
+
+            String[] strs = str.split("\\s+");
+            if (strs.length != pattern.length())
+                  return false;
+                  
+            for (int i = 0; i < pattern.length(); i++) {
+                  char ch = pattern.charAt(i);
+                  if (map.containsKey(strs[i]) && first[ch-'a'] != null) {
+                        if (!strs[i].equals(first[ch - 'a']) || map.get(strs[i]) != ch) {
+                              return false;
+                        }
+                  } else if (!map.containsKey(strs[i]) && first[ch-'a'] == null) {
+                        first[ch - 'a'] = strs[i];
+                        map.put(strs[i], ch);
+                  } else {                      
+                        return false;
+                  }
+            }
+            return true;
+    }
+}
