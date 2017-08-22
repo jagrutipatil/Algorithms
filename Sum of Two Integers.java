@@ -9,16 +9,18 @@
 	Logic: Use XOR for partial addition, & and left shift for carry. 			
 */
 
-public class Solution {
-    public int getSum(int no1, int no2) {
-        int a = no1 ^ no2;
-        int c = (no1 & no2) << 1;
-        
-        while (c != 0) {
-            int p = a ^ c;
-            c = (a & c) << 1;
-            a = p;
-        }
-        return a;
+class Solution {
+    public int getSum(int a, int b) {
+ 		int result = a ^ b;
+ 		int carry = (a & b) << 1;
+
+ 		while (carry != 0) {
+ 			a = result;
+ 			b = carry;
+ 			result = a ^ b;
+ 			carry = (a & b) << 1;
+ 		}
+
+ 		return result;
     }
 }
