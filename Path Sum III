@@ -56,3 +56,42 @@ public class Solution {
         return (node.val == sum ? 1 : 0) + sum(node.left, sum - node.val) + sum(node.right, sum-node.val); 
     }
 }
+
+// Another Appraoch
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int count = 0;
+    public int pathSum(TreeNode root, int sum) {
+        getFromPath(root, sum);
+        return count;
+    }
+    
+    private void getFromPath(TreeNode node, int sum) {
+        if (node == null)
+            return;
+        getPath(node, sum);    
+        getFromPath(node.left, sum);
+        getFromPath(node.right, sum);
+    }
+
+    private void getPath(TreeNode node, int sum) {
+      if (node == null) {
+          return;
+      }
+
+      if (sum == node.val) {
+            count++;
+      }
+      
+      getPath(node.left, sum - node.val);
+      getPath(node.right, sum - node.val);
+    }       
+}
