@@ -123,3 +123,52 @@ class Solution {
         return node;
     }
 }
+
+
+/*
+  Another approach, 
+  with space complexity O(len(l1) + len(l2))
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+      Stack<Integer> stack1 = new Stack<Integer>();       
+      Stack<Integer> stack2 = new Stack<Integer>();       
+
+      while (l1 != null) {
+        stack1.push(l1.val);
+        l1 = l1.next;
+      }
+
+      while (l2 != null) {
+        stack2.push(l2.val);
+        l2 = l2.next;
+      }
+
+      int carry = 0;
+      ListNode list = new ListNode(0);
+      while (stack1.size() != 0 || stack2.size() != 0 || carry != 0) {
+          int a1 = stack1.size()!= 0? stack1.pop() : 0;
+          int b1 = stack2.size()!= 0? stack2.pop() : 0;
+
+          int sum = a1 + b1+ carry;
+          carry = sum / 10;
+          
+          list.val = sum % 10;
+          ListNode head = new ListNode(0);
+          
+          head.next = list;
+          list = head;
+      }
+
+      return list.val == 0? list.next: list;      
+    }
+}
