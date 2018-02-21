@@ -45,3 +45,35 @@ class Solution {
         return positive + negative;
     }
 }
+
+// without using any memory
+
+class Solution {
+    int result = 0;
+    public int findTargetSumWays(int[] nums, int S) {
+        char[] ops = new char[2];
+        ops[0] = '-';
+        ops[1] = '+';
+        findSum(nums, ops, S, 0, 0);
+        return result;
+    }
+    
+    private void findSum(int[] nums, char[] ops, int S, int temp, int start) {                
+        if (start >= nums.length) {
+            if (temp == S) {
+                result++;            
+          }
+            return;
+        }          
+        
+        for (int j = 0; j < ops.length; j++) {
+            findSum(nums, ops, S, temp + getResult(nums[start], ops[j]), start+1);
+        }
+    }
+    
+    private int getResult(int no, char sign) {
+        if (sign == '-')
+            return -1 * no;
+        return no;
+    }
+}
