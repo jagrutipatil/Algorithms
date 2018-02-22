@@ -86,3 +86,21 @@ public class Solution {
     }
 }
 
+// clean solution
+class Solution {
+    public void flatten(TreeNode root) {
+      if (root == null)
+          return;
+       flatten(root.left);
+       TreeNode left = root.left;
+       TreeNode right = root.right; 
+       
+        root.left = null;
+        root.right = left;
+        while(root.right != null) {
+            root = root.right;
+        }
+        root.right = right;
+        flatten(root.right);
+    }
+}
